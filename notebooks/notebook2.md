@@ -317,7 +317,7 @@ qiime demux summarize \
   --i-data seqs.qza \
   --o-visualization seqs.qzv
 ```
-ℹ️ QIIME2 QZV files can be visualized using the command `qiime tools view <filename.qzv>` or using the [online visualizer](https://view.qiime2.org/).
+ℹ️ QIIME2 QZV files can be visualized using the command `qiime tools view <filename.qzv>` or using the [online visualizer](https://view.qiime2.org/). Let's have a look at this visualization.
 
 
 If you remember the quality check reports thare are still some Illumina adapter in the sequences, it is better to remove them using [q2-cutadapt](https://github.com/qiime2/q2-cutadapt). The command `qiime cutadapt trim-paired` has many parameters, in this case we just need `--p-adapter-f` and `--p-adapter-r` to specify the adapter sequence that we want to remove from the 3' end of forward and reverse reads, respectively.
@@ -360,7 +360,7 @@ qiime dada2 denoise-paired \
 ```
 ❗In real life scenarios you should experiment with `--p-trunc-len-f` and `--p-trunc-len-r` parameters and compare the results (in terms of number of retained sequences per sample and sequences length) to choose the best values.
 
-Now let's create visualizations for the two stats files of the DADA2 algorithm.
+Now let's create visualizations for the two stats files produced by the DADA2 algorithm.
 ```bash
 # visualize denoising stats
 qiime metadata tabulate \
@@ -374,7 +374,7 @@ qiime dada2 plot-base-transitions \
 ```
 Let's have a look at these visualizations.
 
-Since in this study barcodes and adapters were added after PCR amplification each fastq file contained both forward and reverse reads. So sequences needs to be re-orientered using the reference database as guide. We can use again the [q2-RESCRIPt](https://github.com/bokulich-lab/RESCRIPt) plugin for doing it.
+Since in this study barcodes and adapters were added after PCR amplification each fastq file contained both forward and reverse reads. So sequences needs to be re-orientered using the reference database as guide. We can use the `qiime rescript orient-seqs` from the [q2-RESCRIPt](https://github.com/bokulich-lab/RESCRIPt) plugin for doing it.
 ```bash
 qiime rescript orient-seqs \
   --i-sequences rep-seqs_MixedOrientation.qza \
@@ -383,7 +383,7 @@ qiime rescript orient-seqs \
   --o-unmatched-seqs orientation_unmatched_sequences.qza
 ```
 
-Exclude unmatched sequences from the ASV table.
+Now we can exclude unmatched sequences () from the ASV table.
 ```bash
 qiime feature-table filter-features \
   --i-table table_MixedOrientation.qza \
