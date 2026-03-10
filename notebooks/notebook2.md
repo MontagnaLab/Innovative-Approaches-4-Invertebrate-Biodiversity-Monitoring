@@ -437,7 +437,7 @@ qiime taxa barplot \
   --i-table table.qza \
   --i-taxonomy taxonomy.qza \
   --m-metadata-file metadata.tsv \
-  --o-visualization Barplot.qzv
+  --o-visualization barplot.qzv
 ```
 Let's have a look at this barplot.
 
@@ -445,7 +445,7 @@ Let's have a look at this barplot.
 
 ### 2.7. Final filtering
 
-As you can see in the barplot there are several non-invertebrate taxa, this is due to the use of primers that are not specific for invertebrates. Now let's filter the table to keep only the invertebrate taxa of our interest: nematodes, arthropods, tardigrads, annelids, rotifers, and flatworms. 
+As you can see in the barplot there are several non-invertebrate taxa, this is due to the use of primers that are not specific for invertebrates. Now let's filter the table to keep only the invertebrate taxa of our interest: nematodes, arthropods, tardigrads, annelids, rotifers, and flatworms. We can specify the taxa we want to keep using the `--p-include` parameter.
 ```bash
 qiime taxa filter-table \
   --i-table table.qza \
@@ -454,22 +454,23 @@ qiime taxa filter-table \
   --o-filtered-table invertebrates_table.qza
 ```
 
-Then generate a new barplot.
-```bash
-qiime taxa barplot \
-  --i-table invertebrates_table.qza \
-  --i-taxonomy taxonomy.qza \
-  --m-metadata-file metadata.tsv \
-  --o-visualization invertebrates_Barplot.qzv
-```
-
-Then to reduce the noise we remove all the ASVs with less than 10 observations.
+To reduce the noise we remove all the ASVs with less than 10 observations.
 ```bash
 qiime feature-table filter-features \
   --i-table invertebrates_table.qza \
   --p-min-frequency 10 \
   --o-filtered-table invertebrates_table_clean.qza
 ```
+
+Then generate a new barplot.
+```bash
+qiime taxa barplot \
+  --i-table invertebrates_table_clean.qza \
+  --i-taxonomy taxonomy.qza \
+  --m-metadata-file metadata.tsv \
+  --o-visualization invertebrates_barplot.qzv
+```
+
 
 
 
@@ -502,8 +503,73 @@ qiime feature-table filter-features \
 
 qiime feature-table summarize \
   --i-table invertebrates_table_clean.qza \
-  --m-sample-metadata-file metadata.tsv \
-  --o-visualization invertebrates_table_clean.qzv
+  --m-metadata-file metadata.tsv \
+  --o-feature-frequencies feature-frequencies_clean.qza \
+  --o-sample-frequencies sample-frequencies_clean.qza \
+  --o-summary invertebrates_table_clean.qzv
+
+qiime diversity core-metrics \
+  --i-table invertebrates_table_clean.qza \
+  --p-sampling-depth 8167 \
+  --m-metadata-file metadata.tsv \
+  --p-n-jobs $JOBS \
+  --output-dir prova_diversity_core
+
+for div in observed_features shannon evenness; do
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity prova_diversity_core/${div}_vector.qza \
+  --m-metadata-file metadata.tsv \
+  --o-visualization prova_diversity_core/${div}_significance.qzv
+done
+
+
+
+
+
+qiime feature-table filter-samples \
+  --i-table invertebrates_table_clean.qza \
+  --m-metadata-file SamplesToExclude.txt \
+  --p-exclude-ids \
+  --o-filtered-table FILT_invertebrates_table_clean.qza
+
+qiime diversity alpha-rarefaction \
+  --i-table FILT_invertebrates_table_clean.qza \
+  --p-max-depth 25000 \
+  --m-metadata-file metadata.tsv \
+  --p-steps 25 \
+  --p-iterations 10 \
+  --o-visualization prova_diversity_core_FILT/alpha_rarefaction.qzv
+
+qiime diversity core-metrics \
+  --i-table FILT_invertebrates_table_clean.qza \
+  --p-sampling-depth 8167 \
+  --m-metadata-file metadata.tsv \
+  --p-n-jobs $JOBS \
+  --output-dir prova_diversity_core_FILT
+
+for div in observed_features shannon evenness; do
+qiime diversity alpha-group-significance \
+  --i-alpha-diversity prova_diversity_core_FILT/${div}_vector.qza \
+  --m-metadata-file metadata.tsv \
+  --o-visualization prova_diversity_core_FILT/${div}_significance.qzv
+done
+
+
+
+for div in observed_features shannon evenness; do
+qiime diversity alpha-correlation \
+  --i-alpha-diversity prova_diversity_core_FILT/${div}_vector.qza \
+  --m-metadata-file metadata.tsv \
+  --o-visualization prova_diversity_core_FILT/${div}_AlphaCorrelation.qzv
+done
+
+
+
+
+
+
+
+
 
 
 
@@ -530,12 +596,6 @@ qiime emperor biplot \
     --p-number-of-features 5
 
 
-qiime diversity core-metrics \
-  --i-table invertebrates_table_clean.qza \
-  --p-sampling-depth 8167 \
-  --m-metadata-file metadata.tsv \
-  --p-n-jobs $JOBS \
-  --output-dir prova_diversity_core
 
 ```
 
