@@ -197,9 +197,6 @@ You will learn to perform metabarcoding analysis using a small subset of the dat
 Here the links to download the data:
 - [subsample of LUCAS raw data](https://drive.google.com/drive/folders/1g8t2hH6qugMfx-x4CI6KlFo8p7w4Nyx2?usp=drive_link) (~0.88 Gb)
 - [metadata](https://github.com/MontagnaLab/InnovativeApproachesForInvertebrateBiodiversityMonitoring/blob/main/data/metadata.tsv), save this file in the folder where you will perform the analysis
-You can download the subsample of LUCAS data and metadata that we will use in the analisis [here..missing.link..](missing.link)
-> [!NOTE]
-> STILL HAVE TO ADD LINK TO DOWNLOAD DATA AND METADATA
 
 ---
 
