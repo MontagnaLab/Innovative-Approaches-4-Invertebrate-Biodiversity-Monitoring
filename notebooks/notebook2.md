@@ -43,8 +43,6 @@ it may be better to look directly at the outputs [here..missing.link..](missing.
 > STILL HAVE TO ADD THE LINK
 
 ```bash
-#! conda activate Reads_QC
-
 # move to the directory where we want to save the outputs #
 cd "$WORKDIR"
 # create a directory for FastQC outputs #
