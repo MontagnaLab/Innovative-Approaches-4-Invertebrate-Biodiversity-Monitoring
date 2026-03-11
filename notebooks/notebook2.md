@@ -312,7 +312,7 @@ qiime demux summarize \
   --i-data seqs.qza \
   --o-visualization seqs.qzv
 ```
-ℹ️ QIIME2 QZV files can be visualized using the command `qiime tools view <filename.qzv>` or loading the files in the [online visualizer](https://view.qiime2.org/). Let's have a look at [seqs.qzv](https://view.qiime2.org/visualization/?src=https://raw.githubusercontent.com/MontagnaLab/InnovativeApproachesForInvertebrateBiodiversityMonitoring/main/data/seqs.qzv).
+ℹ️ QIIME2 QZV files can be visualized using the command `qiime tools view <filename.qzv>` or loading the files in the [online visualizer](https://view.qiime2.org/). Let's have a look at [seqs.qzv](https://view.qiime2.org/visualization/?src=https://raw.githubusercontent.com/MontagnaLab/InnovativeApproachesForInvertebrateBiodiversityMonitoring/main/outputs/QIIME2_visualizations/seqs.qzv).
 
 
 If you remember the quality check reports thare are still some Illumina adapter in the sequences, it is better to remove them using [q2-cutadapt](https://github.com/qiime2/q2-cutadapt). The command `qiime cutadapt trim-paired` has many parameters, in this case we just need `--p-adapter-f` and `--p-adapter-r` to specify the adapter sequence that we want to remove from the 3' end of forward and reverse reads, respectively.
