@@ -38,8 +38,6 @@ ENV=qiime2-amplicon-2026.1
 First of all we check the quality of the raw data using the softwares **FastQC** and **MultiQC**. 
 If you installed these softwares you can run the commands, but since this can be a quite long step 
 it may be better to look directly at the final report [here](https://MontagnaLab.github.io/InnovativeApproachesForInvertebrateBiodiversityMonitoring/data/multiqc_report.html).
-> [!NOTE]
-> STILL HAVE TO ADD THE LINK
 
 ```bash
 # move to the directory where we want to save the outputs #
@@ -70,10 +68,8 @@ To taxonomically classify our sequences we need to construct a reference databas
 In this case we will use [SILVA v.138.1](https://www.arb-silva.de/), a quality checked and regularly updated 
 database of aligned small (16S/18S, SSU) and large subunit (23S/28S, LSU) ribosomal RNA (rRNA) sequences 
 for all three domains of life (Bacteria, Archaea and Eukarya). 
-This can be a very long step since the database is quite huge, so it may be better if you directly use the 
-already prepared database available [here..missing.link..](missing.link).
-> [!NOTE]
-> STILL HAVE TO ADD THE LINK
+This can be a very long step since the database is quite huge, so it may be better if you download the 
+already prepared [reference sequences](https://github.com/MontagnaLab/InnovativeApproachesForInvertebrateBiodiversityMonitoring/blob/main/data/silva-138.1-ssu-nr99-seqs_Euk575-895_derep-uniq.qza) and [taxonomy](https://github.com/MontagnaLab/InnovativeApproachesForInvertebrateBiodiversityMonitoring/blob/main/data/silva-138.1-ssu-nr99-tax_Euk575-895_derep-uniq.qza).
 
 #### 2.3.1 Obtain and clean the reference sequences
 
