@@ -39,9 +39,50 @@ qiime diversity alpha-rarefaction \
 Let's visualize [alpha_rarefaction.qzv](https://view.qiime2.org/visualization/?src=https://raw.githubusercontent.com/MontagnaLab/InnovativeApproachesForInvertebrateBiodiversityMonitoring/main/outputs/QIIME2_visualizations/alpha_rarefaction.qzv).
 
 
+Now that we have chosen a rarefaction depth we can randomly subsample the ASV table using the command `qiime feature-table rarefy`. The main parameters are:
+- `--p-sampling-depth`, the total frequency that each sample should be rarefied to
+- `--p-random-seed`, seed for random subsampling, for reproducibility purpose
+```bash
+qiime feature-table rarefy \
+  --i-table invertebrates_table_clean.qza \
+  --p-sampling-depth 8124 \
+  --p-random-seed 1234 \
+  --o-rarefied-table invertebrates_table_clean_raref.qza
+```
+
+Then we can use the rarefied table to compute alpha diversity. We will calculate three classic alpha diversity indices. 
+
+- **Richness** (`observed_features`)
+
+$$
+S
+$$
+
+- **Shannon index** (`shannon`)
+
+$$
+H' = -\sum_{i=1}^{S} p_i \ln p_i
+$$
+
+- **Simpson index** (`simpson`)
+
+$$
+D = 1 - \sum_{i=1}^{S} p_i^2
+$$
 
 
+$S =$ Number of taxa (ASVs in our case) observed in the sample
 
+$p_i =$ Relative abundance of taxon $i$ in the sample
+
+```bash
+for div in observed_features shannon simpson; do
+  qiime diversity alpha \
+    --i-table invertebrates_table_clean_raref.qza \
+    --p-metric $div \
+    --o-alpha-diversity diversity_results/alpha_${div}_vector.qza
+done
+```
 
 
 
