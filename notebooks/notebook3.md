@@ -75,7 +75,7 @@ $S =$ Number of taxa (ASVs in our case) observed in the sample
 
 $p_i =$ Relative abundance of taxon $i$ in the sample
 
-To perform diversity index calculation we can use ` qiime diversity alpha` in a `for` loop as follow.
+To perform diversity index calculation we can use `qiime diversity alpha` in a `for` loop as follow.
 ```bash
 for div in observed_features shannon simpson; do
   qiime diversity alpha \
@@ -106,8 +106,8 @@ for div in observed_features shannon simpson; do
     --m-metadata-file metadata.tsv \
     --o-visualization diversity_results/alpha_${div}_correlation.qzv
 done
-
 ```
+Let's have a look at these visualizations: [alpha_observed_features_correlation.qzv](https://view.qiime2.org/visualization/?src=https://raw.githubusercontent.com/MontagnaLab/InnovativeApproachesForInvertebrateBiodiversityMonitoring/main/outputs/QIIME2_visualizations/alpha_observed_features_correlation.qzv), [alpha_shannon_correlation.qzv](https://view.qiime2.org/visualization/?src=https://raw.githubusercontent.com/MontagnaLab/InnovativeApproachesForInvertebrateBiodiversityMonitoring/main/outputs/QIIME2_visualizations/alpha_shannon_correlation.qzv), [alpha_simpson_correlation.qzv](https://view.qiime2.org/visualization/?src=https://raw.githubusercontent.com/MontagnaLab/InnovativeApproachesForInvertebrateBiodiversityMonitoring/main/outputs/QIIME2_visualizations/alpha_simpson_correlation.qzv).
 
 ### 3.2. Beta diversity
 
