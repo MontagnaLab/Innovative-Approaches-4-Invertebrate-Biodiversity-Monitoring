@@ -3,7 +3,7 @@
 ## 3. Diversity measures and statistical analyses
 
 ### 3.1. Alpha diversity
-Alpha diversity refers to the diversity within a single sample or community, typically measured as the number and relative abundance of taxa present. Before computing alpha diversity metrics we must deal with the fact that different sequencing depths in metabarcoding datasets can bias computation, due to unequal sampling effort. So metabarcoding datasets must be normalized somehow before calculating alpha diversity. A quick way for doing it (even if probably not the best way) is to randomly subsample the samples to the same depth (rarefaction). Usually the depth of the smallest sample is used. Let's have a look to sequencing depth variation in our samples.
+Alpha diversity refers to the diversity within a single sample or community, typically measured as the number and relative abundance of taxa present. Before computing diversity metrics we must deal with the fact that different sequencing depths in metabarcoding datasets can bias computation, due to unequal sampling effort. So metabarcoding datasets must be normalized somehow before calculating alpha diversity. A quick way for doing it (even if probably not the best way) is to randomly subsample the samples to the same depth (rarefaction). Usually the depth of the smallest sample is used. Let's have a look to sequencing depth variation in our samples.
 
 ```bash
 qiime feature-table summarize \
@@ -110,6 +110,8 @@ done
 Let's have a look at these visualizations: [alpha_observed_features_correlation.qzv](https://view.qiime2.org/visualization/?src=https://raw.githubusercontent.com/MontagnaLab/InnovativeApproachesForInvertebrateBiodiversityMonitoring/main/outputs/QIIME2_visualizations/alpha_observed_features_correlation.qzv), [alpha_shannon_correlation.qzv](https://view.qiime2.org/visualization/?src=https://raw.githubusercontent.com/MontagnaLab/InnovativeApproachesForInvertebrateBiodiversityMonitoring/main/outputs/QIIME2_visualizations/alpha_shannon_correlation.qzv), [alpha_simpson_correlation.qzv](https://view.qiime2.org/visualization/?src=https://raw.githubusercontent.com/MontagnaLab/InnovativeApproachesForInvertebrateBiodiversityMonitoring/main/outputs/QIIME2_visualizations/alpha_simpson_correlation.qzv).
 
 ### 3.2. Beta diversity
+
+Beta diversity refers to the differences in species composition between samples or communities, typically measured as the degree of turnover or dissimilarity in taxa among them.
 
 ```bash
 
