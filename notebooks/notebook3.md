@@ -142,7 +142,20 @@ Let's have a look at the visualization [RPCA_biplot.qzv](https://view.qiime2.org
 > [!IMPORTANT]
 > RPCA is usually robust enough to be applied to not normalized ASV tables, but in real case scenario you should test it comparing the results of the RPCA performed on normalized and not normalized data. See this [tutorial](https://github.com/biocore/gemelli/blob/master/ipynb/tutorials/RPCA-moving-pictures.ipynb) for more datails.
 
+Then we can test the between group similarity using the command `qiime diversity beta-group-significance`.
+```bash
+qiime diversity beta-group-significance \
+  --i-distance-matrix diversity_results/RPCA_distance_matrix.qza \
+  --m-metadata-file metadata.tsv \
+  --m-metadata-column Habitat_type_simpl \
+  --p-method anosim \
+  --p-pairwise \
+  --o-visualization diversity_results/RPCA_GroupSign_HabiatTypeSimpl.qzv
+  
 
+```
+
+### 3.3. Composition
 
 
 
