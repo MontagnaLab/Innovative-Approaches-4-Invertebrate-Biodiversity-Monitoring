@@ -111,33 +111,42 @@ Let's have a look at these visualizations: [alpha_observed_features_correlation.
 
 ### 3.2. Beta diversity
 
-Beta diversity refers to the differences in species composition between samples or communities, typically measured as the degree of turnover or dissimilarity in taxa among them.
-
+Beta diversity refers to the differences in species composition between samples or communities, typically measured as the degree of turnover or dissimilarity in taxa among them. Traditional beta diversity metrics are often not optimal for metabarcoding data because these datasets are compositional and often very sparse. As a result, distance-based approaches (e.g., Bray–Curtis) may be influenced by technical variation rather than true ecological differences. For this reason, alternative methods specifically designed to analyze compositional sequencing data in a more robust and interpretable way have been developed. The [q2-gemelli](https://github.com/biocore/gemelli) plugin contains several of this methods. First let's install the package since it is not contained in the qiime2 base distribution.
 ```bash
-
 pip install gemelli
 qiime dev refresh-cache
+```
 
+In this case, we use the Robust Aitchison PCA (RPCA), which can be seen as a PCA robust to the compositionality and sparsity of the data.
+```bash
 qiime gemelli rpca \
-  --i-table FILT_invertebrates_table_clean.qza \
+  --i-table invertebrates_table_clean.qza \
   --p-n-components 3 \
   --p-min-sample-count 1000 \
   --p-min-feature-count 30 \
   --p-min-feature-frequency 0 \
   --p-max-iterations 5 \
-  --o-biplot prova_diversity_core_FILT/RPCA_biplot.qza \
-  --o-distance-matrix prova_diversity_core_FILT/RPCA_distance_matrix.qza
+  --o-biplot diversity_results/RPCA_biplot.qza \
+  --o-distance-matrix diversity_results/RPCA_distance_matrix.qza
 
 qiime emperor biplot \
-    --i-biplot prova_diversity_core_FILT/RPCA_biplot.qza \
+    --i-biplot diversity_results/RPCA_biplot.qza \
     --m-sample-metadata-file metadata.tsv \
     --m-feature-metadata-file taxonomy.qza \
-    --o-visualization prova_diversity_core_FILT/RPCA_biplot.qzv \
+    --o-visualization diversity_results/RPCA_biplot.qzv \
     --p-number-of-features 5
 
-
-
 ```
+Let's have a look at the visualization [RPCA_biplot.qzv](https://view.qiime2.org/visualization/?src=https://raw.githubusercontent.com/MontagnaLab/InnovativeApproachesForInvertebrateBiodiversityMonitoring/main/outputs/QIIME2_visualizations/RPCA_biplot.qzv)
+
+> [!IMPORTANT]
+> RPCA is usually robust enough to be applied to not normalized ASV tables, but in real case scenario you should test it comparing the results of the RPCA performed on normalized and not normalized data. See this [tutorial](https://github.com/biocore/gemelli/blob/master/ipynb/tutorials/RPCA-moving-pictures.ipynb) for more datails.
+
+
+
+
+
+
 ## **exporting the results**
 
 
