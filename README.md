@@ -2,7 +2,7 @@
 
 This repository contains a complete pipeline for the analysis of metabarcoding data targeting soil invertebrates from environmental DNA (eDNA) samples. The material was developed for the course *“Innovative Approaches for Invertebrate Biodiversity Monitoring”* (Prof. Matteo Montagna, University of Naples “Federico II”).
 
-## Overview
+## Soil Invertebrate eDNA Metabarcoding Pipeline
 
 The pipeline provides a reproducible workflow to process raw sequencing data and perform basic ecological analyses. It is organized into three parts:
 
