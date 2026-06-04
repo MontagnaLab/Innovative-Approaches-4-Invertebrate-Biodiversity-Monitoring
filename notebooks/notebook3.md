@@ -151,32 +151,6 @@ qiime diversity beta-group-significance \
   --p-method anosim \
   --p-pairwise \
   --o-visualization diversity_results/RPCA_GroupSign_HabiatTypeSimpl.qzv
-  
 
 ```
 
-### 3.3. Composition
-
-
-
-
-## **exporting the results**
-
-
-```bash
-
-# export table (ASVs abundance per sample)
-qiime tools export \
-  --input-path table.qza \
-  --output-path exp
-biom convert -i exp/feature-table.biom -o table.tsv --to-tsv
-
-# export taxonomy (ASVs taxonomic assignments)
-qiime tools export \
-  --input-path taxonomy.qza \
-  --output-path exp
-mv exp/taxonomy.tsv taxonomy.tsv
-
-```
-
----
