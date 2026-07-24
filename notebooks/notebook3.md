@@ -98,7 +98,7 @@ done
 Let's have a look at these visualizations: [alpha_observed_features_significance.qzv](https://view.qiime2.org/visualization/?src=https://raw.githubusercontent.com/MontagnaLab/InnovativeApproachesForInvertebrateBiodiversityMonitoring/main/outputs/QIIME2_visualizations/alpha_observed_features_significance.qzv), [alpha_shannon_significance.qzv](https://view.qiime2.org/visualization/?src=https://raw.githubusercontent.com/MontagnaLab/InnovativeApproachesForInvertebrateBiodiversityMonitoring/main/outputs/QIIME2_visualizations/alpha_shannon_significance.qzv), [alpha_simpson_significance.qzv](https://view.qiime2.org/visualization/?src=https://raw.githubusercontent.com/MontagnaLab/InnovativeApproachesForInvertebrateBiodiversityMonitoring/main/outputs/QIIME2_visualizations/alpha_simpson_significance.qzv).
 
 
-We can also compute correlations between diversity indices and numeric variables in our metadata using the command `qiime diversity alpha-group-significance`.
+We can also compute correlations between diversity indices and numeric variables in our metadata using the command `qiime diversity alpha-correlation`.
 ```bash
 for div in observed_features shannon simpson; do
   qiime diversity alpha-correlation \
