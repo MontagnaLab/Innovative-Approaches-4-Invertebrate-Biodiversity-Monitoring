@@ -35,7 +35,7 @@ ENV=qiime2-amplicon-2026.1
 ### 2.2. Reads quality check
 First of all we check the quality of the raw data using the softwares **FastQC** and **MultiQC**. 
 If you installed these softwares you can run the commands, but since this can be a quite long step 
-it may be better to look directly at the final report [here](https://MontagnaLab.github.io/InnovativeApproachesForInvertebrateBiodiversityMonitoring/data/multiqc_report.html).
+it may be better to look directly at the final report [here](https://montagnalab.github.io/Innovative-Approaches-4-Invertebrate-Biodiversity-Monitoring/data/multiqc_report.html).
 
 ```bash
 # move to the directory where we want to save the outputs #
